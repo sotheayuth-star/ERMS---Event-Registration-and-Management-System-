@@ -27,16 +27,42 @@ async function main() {
 
   // Seed a handful of sample events
   const sampleEvents = [
-    { title: "Tech Innovation Summit 2026",  category: "Technology",    date: new Date("2026-03-15"), location: "Phnom Penh Convention Centre", capacity: 500, price: 25 },
-    { title: "Startup Pitch Night",           category: "Business",      date: new Date("2026-04-10"), location: "Factory Phnom Penh",          capacity: 200, price: 10 },
-    { title: "Khmer Digital Arts Festival",  category: "Entertainment", date: new Date("2026-05-20"), location: "National Museum, Phnom Penh",  capacity: 800, price: 0  },
-    { title: "Leadership Workshop Series",   category: "Workshop",      date: new Date("2026-06-05"), location: "Rosewood Hotel, Phnom Penh",  capacity: 50,  price: 50 },
+    {
+      title: "Tech Innovation Summit 2026", category: "Technology",
+      date: new Date("2026-10-30"), location: "Phnom Penh Convention Centre",
+      capacity: 500, price: 25,
+      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "Startup Pitch Night", category: "Business",
+      date: new Date("2026-09-20"), location: "Factory Phnom Penh",
+      capacity: 200, price: 10,
+      image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "Khmer Digital Arts Festival", category: "Entertainment",
+      date: new Date("2026-11-05"), location: "National Museum, Phnom Penh",
+      capacity: 800, price: 0,
+      image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "Leadership Workshop Series", category: "Workshop",
+      date: new Date("2026-12-10"), location: "Rosewood Hotel, Phnom Penh",
+      capacity: 50, price: 50,
+      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "Networking & Innovation Forum", category: "Networking",
+      date: new Date("2026-09-20"), location: "RUPP, Phnom Penh",
+      capacity: 300, price: 15,
+      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
+    },
   ];
 
   for (const e of sampleEvents) {
     await prisma.event.upsert({
       where: { id: sampleEvents.indexOf(e) + 1 },
-      update: {},
+      update: { image: e.image },
       create: { ...e, organizerId: organizer.id, published: true },
     });
     console.log(`  ✓ Event: ${e.title}`);
