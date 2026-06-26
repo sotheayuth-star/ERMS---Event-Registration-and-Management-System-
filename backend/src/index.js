@@ -1,0 +1,58 @@
+require("dotenv").config();
+const express = require("express");
+const cors    = require("cors");
+const path    = require("path");
+
+const authRoutes          = require("./routes/auth");
+const eventRoutes         = require("./routes/events");
+const registrationRoutes  = require("./routes/registrations");
+const ticketRoutes        = require("./routes/tickets");
+const refundRoutes        = require("./routes/refunds");
+const testimonialRoutes   = require("./routes/testimonials");
+const userRoutes          = require("./routes/users");
+const errorHandler        = require("./middleware/errorHandler");
+
+const app  = express();
+const PORT = process.env.PORT || 4000;
+
+const DEV_ORIGINS = [
+  process.env.FRONTEND_URL,
+  "http://127.0.0.1:5173", "http://localhost:5173",
+  "http://127.0.0.1:5500", "http://localhost:5500",
+  "http://127.0.0.1:5501", "http://localhost:5501",
+  "http://127.0.0.1:3000", "http://localhost:3000",
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, cb) => {
+    // Allow requests with no origin (curl, Postman) or any dev origin
+    if (!origin || DEV_ORIGINS.includes(origin) || process.env.NODE_ENV === "development") {
+      return cb(null, true);
+    }
+    cb(new Error(`CORS: ${origin} not allowed`));
+  },
+  credentials: true,
+}));
+app.use(express.json());
+
+app.get("/api/health", (_req, res) => res.json({ status: "ok" }));
+
+app.use("/api/auth",          authRoutes);
+app.use("/api/events",        eventRoutes);
+app.use("/api/registrations", registrationRoutes);
+app.use("/api/tickets",       ticketRoutes);
+app.use("/api/refunds",       refundRoutes);
+app.use("/api/testimonials",  testimonialRoutes);
+app.use("/api/users",         userRoutes);
+
+app.use(errorHandler);
+
+// ── Serve React frontend in production ────────────────────────────────────────
+if (process.env.NODE_ENV === "production") {
+  const distDir = path.join(__dirname, "../../frontend/dist");
+  app.use(express.static(distDir));
+  // React Router — send all non-API requests to index.html
+  app.get("*", (_req, res) => res.sendFile(path.join(distDir, "index.html")));
+}
+
+app.listen(PORT, () => console.log(`ERMS API running on http://localhost:${PORT}`));
