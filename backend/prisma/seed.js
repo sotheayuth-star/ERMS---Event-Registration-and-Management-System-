@@ -60,11 +60,12 @@ async function main() {
   ];
 
   for (const e of sampleEvents) {
-    await prisma.event.upsert({
-      where: { id: sampleEvents.indexOf(e) + 1 },
-      update: { image: e.image },
-      create: { ...e, organizerId: organizer.id, published: true },
-    });
+    const existing = await prisma.event.findFirst({ where: { title: e.title } });
+    if (existing) {
+      await prisma.event.update({ where: { id: existing.id }, data: { image: e.image } });
+    } else {
+      await prisma.event.create({ data: { ...e, organizerId: organizer.id, published: true } });
+    }
     console.log(`  ✓ Event: ${e.title}`);
   }
 

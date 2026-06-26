@@ -9,15 +9,15 @@ import './OrganizerDashboard.css';
 
 const MOCK_EVENTS = [
   { id: 1, title: 'Tech Innovation Summit 2026', category: 'Technology', date: 'October 30, 2026',
-    time: '9:00 AM - 5:00 PM', location: 'Prey Veng Province', image: '/assets/images/Technology.png',
+    time: '9:00 AM - 5:00 PM', location: 'Prey Veng Province', image: '/images/Tech1.jpg',
     price: 250, capacity: 2300, registered: 1000, status: 'published',
     description: 'The premier technology conference of 2026 — AI, Web3 and sustainable tech.' },
   { id: 2, title: 'Digital Marketing Workshop', category: 'Education', date: 'September 20, 2026',
-    time: '9:00 AM - 4:00 PM', location: 'Phnom Penh, RUPP', image: '/assets/images/Business.webp',
+    time: '9:00 AM - 4:00 PM', location: 'Phnom Penh, RUPP', image: '/images/Business.webp',
     price: 100, capacity: 2000, registered: 1500, status: 'published',
     description: 'Hands-on workshop covering modern digital marketing strategy and tools.' },
   { id: 3, title: 'Networking & Innovation Forum', category: 'Networking', date: 'September 20, 2026',
-    time: '10:00 AM - 5:00 PM', location: 'Phnom Penh, RUPP', image: '/assets/images/Networking.jpg',
+    time: '10:00 AM - 5:00 PM', location: 'Phnom Penh, RUPP', image: '/images/Networking.jpg',
     price: 50, capacity: 2000, registered: 2000, status: 'draft',
     description: 'Connect with founders, investors and creators across the region.' },
 ];
@@ -273,7 +273,7 @@ export default function OrganizerDashboard() {
                   return (
                     <div className="org-event-card" key={ev.id}>
                       <div className="org-event-img">
-                        <img src={ev.image} alt={ev.title} onError={e => { e.currentTarget.src = '/assets/images/Sport%20event.jpg'; }} />
+                        <img src={ev.image} alt={ev.title} onError={e => { e.currentTarget.src = '/images/Sport%20event.jpg'; }} />
                         <div className="org-price-tag">${ev.price}</div>
                       </div>
                       <div className="org-event-info">
@@ -352,7 +352,7 @@ export default function OrganizerDashboard() {
               {/* Event detail */}
               <div className="detail-section" style={{ background: 'var(--bg-white)', border: '1px solid var(--border)', borderRadius: 'var(--border-radius-lg)', padding: '20px 24px', marginBottom: 16 }}>
                 <img className="ev-summary-img" src={currentEvent.image} alt={currentEvent.title}
-                  onError={e => { e.currentTarget.src = '/assets/images/Sport%20event.jpg'; }} />
+                  onError={e => { e.currentTarget.src = '/images/Sport%20event.jpg'; }} />
                 <div style={{ marginBottom: 8 }}>
                   <span className={`badge ${currentEvent.status === 'published' ? 'badge-confirmed' : 'badge-pending'}`}>
                     {currentEvent.status === 'published' ? 'Published' : 'Draft'}

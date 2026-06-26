@@ -128,7 +128,7 @@ export default function CreateEventPage() {
       date:        dateStr,
       time:        fmtTime(startTime, endTime),
       location:    (venueName || venueAddress || 'TBA').trim(),
-      image:       imageData || '/assets/images/Technology.png',
+      image:       imageData || '/images/Tech1.jpg',
       price,
       capacity,
       registered:  editingEvent ? (Number(editingEvent.registered) || 0) : 0,
@@ -145,7 +145,7 @@ export default function CreateEventPage() {
       localStorage.setItem('erms_created_events', JSON.stringify(list));
     };
     try { push(ev); } catch {
-      ev.image = '/assets/images/Technology.png';
+      ev.image = '/images/Tech1.jpg';
       try { push(ev); } catch {}
     }
   }

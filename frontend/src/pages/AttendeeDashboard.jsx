@@ -16,7 +16,7 @@ const MOCK_UPCOMING = [
     price: 250,
     status: 'confirmed',
     ticketCode: 'TKT-001-2026',
-    image: '/assets/images/Technology.png',
+    image: '/images/Tech1.jpg',
   },
   {
     title: 'Digital Marketing Workshop',
@@ -26,7 +26,7 @@ const MOCK_UPCOMING = [
     price: 300,
     status: 'confirmed',
     ticketCode: 'TKT-002-2026',
-    image: '/assets/images/Workshop.png',
+    image: '/images/Workshop.png',
   },
 ];
 
@@ -207,7 +207,7 @@ export default function AttendeeDashboard() {
             price:      Number(t.unit_price || t.price || ev.price) || 0,
             status:     t.status  || 'confirmed',
             ticketCode: t.ticketCode || t.id,
-            image:      ev.image  || '/assets/images/Technology.png',
+            image:      ev.image  || '/images/Tech1.jpg',
             _date:      evDate,
           };
         });
@@ -473,7 +473,7 @@ export default function AttendeeDashboard() {
                     <img
                       src={ev.image}
                       alt={ev.title}
-                      onError={e => { e.currentTarget.src = '/assets/images/Sport%20event.jpg'; }}
+                      onError={e => { e.currentTarget.src = '/images/Sport%20event.jpg'; }}
                     />
                     <span className="price-tag">${ev.price}</span>
                   </div>

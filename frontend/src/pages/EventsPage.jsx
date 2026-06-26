@@ -120,9 +120,9 @@ function EventCard({ event, index, onClick }) {
     >
       <div className="event-card-img">
         <img
-          src={event.image || '/assets/images/Technology.png'}
+          src={event.image || '/images/Tech1.jpg'}
           alt={event.title}
-          onError={e => { e.target.src = '/assets/images/Technology.png'; e.target.onerror = null; }}
+          onError={e => { e.target.src = '/images/Tech1.jpg'; e.target.onerror = null; }}
         />
         <span className={`badge ${status === 'Full' ? 'badge-full' : 'badge-available'}`}>
           {status}

@@ -228,7 +228,7 @@ export default function EventDetailPage() {
 
         <div className="detail-top">
           <div className="detail-img">
-            <img src={event.image || '/assets/images/Sport%20event.jpg'} alt={event.title} onError={e => { e.target.src = '/assets/images/Sport%20event.jpg'; }} />
+            <img src={event.image || '/images/Sport%20event.jpg'} alt={event.title} onError={e => { e.target.src = '/images/Sport%20event.jpg'; }} />
             <div className="detail-img-grad" />
             <span className="detail-cat-glass">{event.category}</span>
             <div className="detail-price-tag">${event.price}</div>
