@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors    = require("cors");
-const path    = require("path");
 
 const authRoutes          = require("./routes/auth");
 const eventRoutes         = require("./routes/events");
@@ -47,12 +46,5 @@ app.use("/api/users",         userRoutes);
 
 app.use(errorHandler);
 
-// ── Serve React frontend in production ────────────────────────────────────────
-if (process.env.NODE_ENV === "production") {
-  const distDir = path.join(__dirname, "../../frontend/dist");
-  app.use(express.static(distDir));
-  // React Router — send all non-API requests to index.html
-  app.get("*", (_req, res) => res.sendFile(path.join(distDir, "index.html")));
-}
-
+// start
 app.listen(PORT, () => console.log(`ERMS API running on http://localhost:${PORT}`));

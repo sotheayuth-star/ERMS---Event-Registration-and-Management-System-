@@ -5,7 +5,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const USE_MOCK = false;
-const API_BASE = '/api'; // Vite dev proxy strips the port — no CORS needed
+// In dev, Vite proxies /api → localhost:4000 so no CORS is needed.
+// In production (separate Railway service), VITE_API_BASE must be set to the
+// backend's Railway URL, e.g. https://erms-backend.up.railway.app
+const API_BASE = (import.meta.env.VITE_API_BASE ?? '') + '/api';
 
 // ── Tiny delay so mock responses feel async ──────────────────────────────────
 const delay = (ms = 150) => new Promise(r => setTimeout(r, ms));
